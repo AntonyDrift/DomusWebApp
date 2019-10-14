@@ -3,11 +3,8 @@ package by.domus.app.model.beans.impl.products;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.bytebuddy.asm.Advice;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 //quantity and condition
 @Data
@@ -20,6 +17,15 @@ public class Storage {
     private Long id;
     private Integer amount;
     private Integer rejected;
-    private Integer reserved;
     private Integer inStock;
+
+    @OneToOne(mappedBy = "storage")
+    private Reserve reserve;
+
+    @OneToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+
+
 }

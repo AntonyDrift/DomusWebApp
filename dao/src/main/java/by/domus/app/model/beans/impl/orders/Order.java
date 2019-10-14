@@ -21,22 +21,10 @@ public class Order {
     @Id
     @GeneratedValue
     private Long id;
-//    private Long number;
-//    private Timestamp date;
-//    @ManyToOne(
-//            cascade = CascadeType.ALL,
-//            fetch = FetchType.LAZY)
-//    @JoinColumn(name = "partner_id")
-//    private Partner partner;
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Partner partner;
+    @OneToOne(mappedBy = "order")
+    Basket basket;
 
-    @OneToMany(mappedBy = "order")
-    private List<Basket> basketList;
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", basketList=" + basketList.stream().dropWhile(.findAny()).map(i->i.toString()) +
-                '}';
-    }
 }

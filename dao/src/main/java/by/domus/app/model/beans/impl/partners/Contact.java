@@ -5,23 +5,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.util.Map;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "contract")
-public class Contract {
+@Entity(name = "contacts")
+public class Contact {
     @Id
     @GeneratedValue
     private Long id;
-    private String number;
-    private String type;
-    private Integer days;
+    private String legalAddress;
+    private String postAddress;
+    private String deliveryAddress;
+    private String phoneNumber;
+    private String mobileNumber;
+    private String fax;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "partner_id")
     private Partner partner;
-
 }

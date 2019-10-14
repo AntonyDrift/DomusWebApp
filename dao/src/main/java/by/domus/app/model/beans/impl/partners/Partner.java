@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Arrays;
 import java.util.List;
 
 @Data
@@ -16,17 +15,20 @@ import java.util.List;
 public class Partner {
     @Id
     @GeneratedValue
-    @Column(name = "partner_id", unique = true)
     private Long id;
     private String name;
-    private String fullName;
-    private Integer payerAccountNumber;
-    private Long contractId;
-    private Long paymentAccountId;
-//    @OneToMany(
-//            mappedBy = "partner",
-//            fetch = FetchType.LAZY,
-//            cascade = CascadeType.ALL)
-//    private List<Order> orderList;
+    private String fullname;
+
+    @OneToOne(mappedBy = "partner")
+    private Contact contact;
+
+
+    @OneToMany(mappedBy = "partner")
+    private List<PaymentAccount> paymentAccountList;
+    @OneToMany(mappedBy = "partner")
+    private List<Order> orderList;
+    @OneToMany(mappedBy = "partner")
+    private List<Contract> contractList;
+
 }
 

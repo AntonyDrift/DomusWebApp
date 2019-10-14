@@ -12,26 +12,15 @@ import java.util.Map;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+@Entity(name = "basket")
 public class Basket {
 
     @Id
     @GeneratedValue
     private Long id;
-    @ManyToOne
-    @JoinColumn(name="order_id")
+    @OneToOne
+    @JoinColumn(name = "order_id")
     private Order order;
-    @OneToOne(mappedBy = "basket")
-    private Product product;
-    private Integer amount;
-
-    @Override
-    public String toString() {
-        return "Basket{" +
-                "id=" + id +
-                ", order=" + order.toString() +
-                ", product=" + product.toString() +
-                ", amount=" + amount +
-                '}';
-    }
+    @OneToMany(mappedBy = "basket")
+    private List<BasketItem> basketItemList;
 }
