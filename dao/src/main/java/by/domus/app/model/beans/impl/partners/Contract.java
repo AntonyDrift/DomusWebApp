@@ -24,4 +24,14 @@ public class Contract {
     @JoinColumn(name = "partner_id")
     private Partner partner;
 
+    @Override
+    public String toString() {
+        return "Contract{" +
+                "id=" + id +
+                ", number='" + number + '\'' +
+                ", type='" + type + '\'' +
+                ", days=" + days +
+                ", partner=" + partner.getId() +
+                '}';
+    }
 }

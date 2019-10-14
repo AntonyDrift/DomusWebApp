@@ -12,70 +12,74 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 
     Class<T> clazz;
     private HibernateUtil util = new HibernateUtil();
+    private EntityManager em = util.getEntityManager("by.domus.app");
 
-    private EntityManager getEM() {
-        return util.getEntityManager("by.domus.app");
-    }
 
     @Override
     public T add(T t) {
-       getEM().getTransaction().begin();
         try {
-            getEM().persist(t);
-            getEM().getTransaction().commit();
-            return t;
+            em.getTransaction().begin();
+            em.persist(t);
+            em.getTransaction().commit();
         } catch (Exception e) {
-            util.closeEmFactory();
-            return t;
+            em.getTransaction().rollback();
+            e.printStackTrace();
         }
+        return t;
     }
 
     @Override
     public T get(Long id) {
-        getEM().getTransaction().begin();
         try {
-            T t = getEM().find(clazz, id);
-            getEM().getTransaction().commit();
+            em.getTransaction().begin();
+            T t = em.find(clazz, id);
+            em.getTransaction().commit();
             return t;
         } catch (Exception e) {
-            util.closeEmFactory();
+            e.printStackTrace();
+            em.getTransaction().rollback();
             return null;
         }
     }
 
     @Override
     public T update(T t) {
-        getEM().getTransaction().begin();
         try {
-            getEM().merge(t);
-            return t;
+            em.getTransaction().begin();
+            em.merge(t);
+            em.getTransaction().commit();
         } catch (Exception e) {
-            util.closeEmFactory();
-            return null;
+            e.printStackTrace();
+            em.getTransaction().rollback();
         }
+        return t;
     }
 
     @Override
     public void delete(Long id) {
-        getEM().getTransaction().begin();
         try {
-            T t = getEM().find(clazz, id);
-            getEM().remove(t);
+            em.getTransaction().begin();
+            T t = em.find(clazz, id);
+            em.remove(t);
+            em.getTransaction().commit();
         } catch (Exception e) {
-            util.closeEmFactory();
+            e.printStackTrace();
+            em.getTransaction().rollback();
         }
     }
 
     @Override
     public List<T> getAll() {
-        getEM().getTransaction().begin();
         try {
-            List<T> list = getEM()
-                    .createQuery("FROM" + clazz.getSimpleName())
+            em.getTransaction().begin();
+            List<T> list = em
+                    .createQuery("FROM " + clazz.getSimpleName().toLowerCase())
                     .getResultList();
+            em.getTransaction().commit();
             return list;
         } catch (Exception e) {
-            util.closeEmFactory();
+            e.printStackTrace();
+            em.getTransaction().rollback();
             return null;
         }
     }

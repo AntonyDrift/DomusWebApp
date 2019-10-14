@@ -13,7 +13,7 @@
 <!--            <property name="hibernate.dialect.storage_engine" value="innoDB"/>-->
             <property name="hibernate.connection.pool_size" value="10"/>
 <!--            <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDB103Dialect"/>-->
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.use_sql_comments" value="true"/>
 <!--            <property name="hibernate.show_sql" value="true"/>-->
         </properties>

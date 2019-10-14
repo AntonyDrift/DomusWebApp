@@ -21,10 +21,19 @@ public class Order {
     @Id
     @GeneratedValue
     private Long id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Partner partner;
-    @OneToOne(mappedBy = "order")
+    //maybe orphan remove true
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     Basket basket;
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", partner=" + partner.getName() +
+                ", basket=" + basket.toString() +
+                '}';
+    }
 }

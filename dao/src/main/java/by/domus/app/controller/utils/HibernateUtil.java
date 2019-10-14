@@ -14,8 +14,6 @@ public class HibernateUtil {
         }
         return EM_FACTORY.createEntityManager();
     }
-    private void dsds() {
-    }
     public static void closeEmFactory() {
         EM_FACTORY.close();
     }

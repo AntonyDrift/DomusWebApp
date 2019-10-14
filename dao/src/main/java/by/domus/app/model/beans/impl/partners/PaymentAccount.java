@@ -24,5 +24,13 @@ public class PaymentAccount {
     @JoinColumn(name = "partner_id")
     private Partner partner;
 
-
+    @Override
+    public String toString() {
+        return "PaymentAccount{" +
+                "id=" + id +
+                ", paymentAccountCode='" + paymentAccountCode + '\'' +
+                ", bank=" + bank.getId() +
+                ", partner=" + partner.getId() +
+                '}';
+    }
 }

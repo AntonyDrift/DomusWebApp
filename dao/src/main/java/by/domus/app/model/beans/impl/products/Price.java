@@ -21,7 +21,18 @@ public class Price {
     private BigDecimal wholesale;
     private BigDecimal dealer;
 
-    @OneToOne
-    @JoinColumn(name = "product_id")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
+//    @JoinColumn(name = "product_id")
     private Product product;
+
+    @Override
+    public String toString() {
+        return "Price{" +
+                "id=" + id +
+                ", costPrice=" + costPrice +
+                ", retail=" + retail +
+                ", wholesale=" + wholesale +
+                ", dealer=" + dealer +
+                '}';
+    }
 }

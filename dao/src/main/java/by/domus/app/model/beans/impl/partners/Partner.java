@@ -30,5 +30,17 @@ public class Partner {
     @OneToMany(mappedBy = "partner")
     private List<Contract> contractList;
 
+    @Override
+    public String toString() {
+        return "Partner{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", fullname='" + fullname + '\'' +
+                ", contact=" + contact.getId() +
+                ", paymentAccountList=" + paymentAccountList +
+                ", orderList=" + orderList +
+                ", contractList=" + contractList +
+                '}';
+    }
 }
 

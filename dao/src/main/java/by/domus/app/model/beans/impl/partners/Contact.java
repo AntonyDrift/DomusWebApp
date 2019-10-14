@@ -24,4 +24,18 @@ public class Contact {
     @OneToOne
     @JoinColumn(name = "partner_id")
     private Partner partner;
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "id=" + id +
+                ", legalAddress='" + legalAddress + '\'' +
+                ", postAddress='" + postAddress + '\'' +
+                ", deliveryAddress='" + deliveryAddress + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", mobileNumber='" + mobileNumber + '\'' +
+                ", fax='" + fax + '\'' +
+                ", partner=" + partner.getId() +
+                '}';
+    }
 }

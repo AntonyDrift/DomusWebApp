@@ -16,10 +16,22 @@ public class BasketItem {
     @Id
     @GeneratedValue
     private Long id;
+    private Integer amount;
+
+    @OneToOne(mappedBy = "basketItem",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private  Product product;
+
+
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "basket_id")
     private Basket basket;
-    @OneToOne(mappedBy = "basketItem",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private  Product product;
-    private Integer amount;
+
+    @Override
+    public String toString() {
+        return "BasketItem{" +
+                "id=" + id +
+                ", product=" + product.getName() +
+                ", amount=" + amount +
+                '}';
+    }
 }

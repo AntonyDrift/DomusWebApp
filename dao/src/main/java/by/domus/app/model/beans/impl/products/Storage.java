@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-//quantity and condition
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,14 +17,20 @@ public class Storage {
     private Integer amount;
     private Integer rejected;
     private Integer inStock;
+    private Integer reserve;
 
-    @OneToOne(mappedBy = "storage")
-    private Reserve reserve;
-
-    @OneToOne
-    @JoinColumn(name = "product_id")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval = true)
+//    @JoinColumn(name = "product_id")
     private Product product;
 
-
-
+    @Override
+    public String toString() {
+        return "Storage{" +
+                "id=" + id +
+                ", amount=" + amount +
+                ", rejected=" + rejected +
+                ", inStock=" + inStock +
+                ", reserve=" + reserve +
+                '}';
+    }
 }

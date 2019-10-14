@@ -24,4 +24,18 @@ public class Bank {
     @OneToOne
     @JoinColumn(name = "payment_account_id")
     private PaymentAccount paymentAccount;
+
+    @Override
+    public String toString() {
+        return "Bank{" +
+                "id=" + id +
+                ", bankName='" + bankName + '\'' +
+                ", branchBankName='" + branchBankName + '\'' +
+                ", bankIdentifierCode='" + bankIdentifierCode + '\'' +
+                ", address='" + address + '\'' +
+                ", contact='" + contact + '\'' +
+                ", BankPaymentAccountCode='" + BankPaymentAccountCode + '\'' +
+                ", paymentAccount=" + paymentAccount.getId() +
+                '}';
     }
+}
